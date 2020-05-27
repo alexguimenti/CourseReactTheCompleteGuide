@@ -1,38 +1,48 @@
 import React, { Component } from 'react';
 import './App.css';
-
-class UserInput extends Component {
-  render() {
-    return (
-      <input type="text" />
-    )
-  }
-}
-
-const UserOutput = props => {
-  return (
-    <div>
-      <p>Username: {props.userName}</p>
-      <p>Paragraph 2</p>
-    </div>
-  )
-}
+import UserOutput from './components/UserOutput'
+import UserInput from './components/UserInput'
+import Counter from './components/Counter'
 
 class App extends Component {
-  state = {
-    userName: 'alexguimenti'
-  }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="puts">
-          <UserInput />
-          <UserOutput userName={this.state.userName} />
-        </div>
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			userName: "alexguimenti"
+		}
+	}
+
+	updateUserNameHandler = (event) => {
+		this.setState({
+			userName: event.target.value
+		})
+	}
+
+	render() {
+
+		
+
+
+		return (
+			<div className="App">
+				<div className="puts">
+					<UserInput
+						userName={this.state.userName}
+						changed={this.updateUserNameHandler} />
+					<UserOutput
+						userName={this.state.userName}
+					/>
+					<br />
+					<br />
+					<br />
+					<br />
+					<Counter initialCount={0} />
+					<Counter initialCount={5} />
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;
